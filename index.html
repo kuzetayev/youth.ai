@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youth.AI</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+</style>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#FDFAF5;--warm:#F5F0E8;--sand:#E8DFD0;
+  --ink:#1A1410;--ink2:#3D3530;--ink3:#6B5F58;
+  --accent:#E85D2F;--accent2:#F2A654;--accent3:#4A90D9;
+  --green:#2D9B6F;--purple:#7B5EA7;
+  --card:#FFFFFF;
+  --r:14px;
+  --sh:0 2px 8px rgba(26,20,16,.08),0 0 0 1px rgba(26,20,16,.06);
+  --sh2:0 8px 32px rgba(26,20,16,.12),0 0 0 1px rgba(26,20,16,.06);
+}
+body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{height:60px;background:var(–cream);border-bottom:1.5px solid var(–sand);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:50}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-badge{width:34px;height:34px;background:var(–accent);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800;letter-spacing:-1px;font-family:‘Space Mono’,monospace}
+.logo-name{font-size:16px;font-weight:800;letter-spacing:-0.5px;color:var(–ink)}
+.logo-name span{color:var(–accent)}
+.nav-tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(–ink3);background:var(–warm);border:1.5px solid var(–sand);padding:4px 10px;border-radius:6px}
+.nav-ai-btn{height:36px;padding:0 16px;background:var(–ink);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:700;font-family:‘Plus Jakarta Sans’,sans-serif;cursor:pointer;display:flex;align-items:center;gap:6px;transition:.15s}
+.nav-ai-btn:hover{background:var(–ink2)}
+.nav-ai-btn .dot{width:6px;height:6px;border-radius:50%;background:#4ADE80;animation:pulse 2s infinite}
+
+/* HERO — pitch deck style */
+.hero{padding:52px 24px 36px;max-width:700px;margin:0 auto;text-align:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(–accent);margin-bottom:20px}
+.hero-eyebrow::before,.hero-eyebrow::after{content:’’;flex:1;height:1px;background:var(–accent);opacity:.4;width:28px}
+h1{font-size:clamp(32px,8vw,52px);font-weight:800;letter-spacing:-2px;line-height:1.05;color:var(–ink);margin-bottom:16px}
+h1 .hi{color:var(–accent);position:relative;display:inline-block}
+h1 .hi::after{content:’’;position:absolute;bottom:-4px;left:0;right:0;height:3px;background:var(–accent);border-radius:2px}
+.hero-sub{font-size:16px;color:var(–ink3);line-height:1.65;margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto}
+.stats-row{display:flex;justify-content:center;gap:0;border:1.5px solid var(–sand);border-radius:16px;overflow:hidden;background:var(–card);margin-bottom:36px}
+.stat{flex:1;padding:18px 12px;text-align:center;border-right:1.5px solid var(–sand)}
+.stat:last-child{border-right:none}
+.stat-n{font-size:26px;font-weight:800;letter-spacing:-1px;color:var(–ink);font-family:‘Space Mono’,monospace}
+.stat-n.orange{color:var(–accent)}
+.stat-l{font-size:10px;font-weight:600;color:var(–ink3);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
+
+/* SEARCH */
+.search-zone{max-width:580px;margin:0 auto 24px;padding:0 24px}
+.search-wrap{display:flex;gap:10px}
+.s-box{flex:1;position:relative}
+.s-ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none}
+.s-input{width:100%;height:48px;padding:0 14px 0 42px;border:1.5px solid var(–sand);border-radius:12px;font-size:14px;font-family:‘Plus Jakarta Sans’,sans-serif;background:var(–card);color:var(–ink);outline:none;box-shadow:var(–sh);transition:.15s}
+.s-input::placeholder{color:var(–ink3)}
+.s-input:focus{border-color:var(–accent);box-shadow:0 0 0 3px rgba(232,93,47,.12),var(–sh)}
+
+/* FILTERS */
+.filters{max-width:700px;margin:0 auto 20px;padding:0 24px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.pill{height:34px;padding:0 16px;border-radius:20px;border:1.5px solid var(–sand);background:var(–card);color:var(–ink3);font-size:13px;font-weight:600;font-family:‘Plus Jakarta Sans’,sans-serif;cursor:pointer;white-space:nowrap;transition:.15s;box-shadow:var(–sh)}
+.pill:hover{border-color:var(–ink3);color:var(–ink)}
+.pill.active{background:var(–ink);color:#fff;border-color:var(–ink)}
+
+/* SECTION LABEL */
+.section-header{max-width:700px;margin:0 auto 12px;padding:0 24px;display:flex;align-items:center;gap:10px}
+.sec-line{flex:1;height:1.5px;background:var(–sand)}
+.sec-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(–ink3);white-space:nowrap}
+
+/* CARDS */
+.cards{max-width:700px;margin:0 auto;padding:0 24px 120px;display:flex;flex-direction:column;gap:10px}
+.card{background:var(–card);border:1.5px solid var(–sand);border-radius:var(–r);padding:20px 22px;cursor:pointer;transition:.2s;box-shadow:var(–sh);animation:rise .35s ease both;position:relative;overflow:hidden}
+.card::before{content:’’;position:absolute;left:0;top:0;bottom:0;width:3px}
+.card.hackathon::before{background:var(–accent)}
+.card.olympiad::before{background:var(–accent3)}
+.card.grant::before{background:var(–green)}
+.card.program::before{background:var(–accent2)}
+.card.competition::before{background:var(–purple)}
+.card.mun::before{background:#E8A030}
+.card:hover{box-shadow:var(–sh2);transform:translateY(-2px);border-color:var(–sand)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.badge{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border-radius:5px}
+.bh{background:#FEF0EB;color:var(–accent)}
+.bo{background:#EBF4FF;color:var(–accent3)}
+.bg{background:#EDFAF3;color:var(–green)}
+.bp{background:#FFF8EE;color:#C47B10}
+.bc{background:#F5EFFE;color:var(–purple)}
+.bm{background:#FFF6E5;color:#B87A00}
+.card-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.deadline{font-size:11px;color:var(–ink3);font-family:‘Space Mono’,monospace}
+.deadline.soon{color:var(–accent);font-weight:700}
+.card-title{font-size:15px;font-weight:700;letter-spacing:-.3px;margin-bottom:6px;color:var(–ink);line-height:1.3}
+.card-desc{font-size:13px;color:var(–ink3);line-height:1.6;margin-bottom:14px}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:11px;color:var(–ink3);background:var(–warm);padding:3px 8px;border-radius:5px;border:1px solid var(–sand)}
+.card-link{font-size:12px;color:var(–accent);font-weight:700;display:flex;align-items:center;gap:3px;white-space:nowrap}
+.empty{text-align:center;padding:60px 20px;color:var(–ink3)}
+.empty-ico{font-size:36px;margin-bottom:10px}
+.empty-t{font-size:15px;font-weight:600;color:var(–ink2)}
+
+/* FAB */
+.fab{position:fixed;bottom:24px;right:20px;z-index:100;display:flex;align-items:center;gap:8px;height:50px;padding:0 20px;background:var(–ink);color:#fff;border:none;border-radius:25px;font-size:14px;font-weight:700;font-family:‘Plus Jakarta Sans’,sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(26,20,16,.25);transition:.2s}
+.fab:hover{background:var(–ink2);transform:translateY(-2px)}
+.fab .fdot{width:7px;height:7px;border-radius:50%;background:#4ADE80;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+/* OVERLAY + PANEL */
+.overlay{position:fixed;inset:0;background:rgba(26,20,16,.35);z-index:150;opacity:0;pointer-events:none;transition:.25s;backdrop-filter:blur(3px)}
+.overlay.open{opacity:1;pointer-events:all}
+.panel{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(–cream);border-radius:20px 20px 0 0;display:flex;flex-direction:column;height:80vh;transform:translateY(100%);transition:transform .32s cubic-bezier(.32,.72,0,1);border-top:1.5px solid var(–sand)}
+.panel.open{transform:translateY(0)}
+.handle{width:40px;height:4px;background:var(–sand);border-radius:2px;margin:12px auto 0;flex-shrink:0}
+.panel-head{padding:14px 20px 14px;border-bottom:1.5px solid var(–sand);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.ai-ava{width:38px;height:38px;background:var(–ink);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.panel-meta{margin-left:10px}
+.panel-name{font-size:14px;font-weight:800;color:var(–ink);letter-spacing:-.3px}
+.panel-status{font-size:11px;color:var(–green);font-weight:600;margin-top:1px}
+.close-x{width:32px;height:32px;border-radius:9px;background:var(–warm);border:1.5px solid var(–sand);cursor:pointer;font-size:14px;color:var(–ink3);display:flex;align-items:center;justify-content:center}
+.close-x:hover{background:var(–sand)}
+.msgs{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin;scrollbar-color:var(–sand) transparent}
+.msg{max-width:82%;animation:rise .2s ease}
+.msg.user{align-self:flex-end}
+.msg.ai{align-self:flex-start}
+.bubble{padding:11px 15px;font-size:13.5px;line-height:1.6;border-radius:14px}
+.msg.user .bubble{background:var(–ink);color:#fff;border-bottom-right-radius:3px}
+.msg.ai .bubble{background:var(–card);color:var(–ink);border:1.5px solid var(–sand);border-bottom-left-radius:3px}
+.typing{background:var(–card);border:1.5px solid var(–sand);border-radius:14px;border-bottom-left-radius:3px;padding:13px 17px;display:flex;gap:5px;align-self:flex-start}
+.tdot{width:6px;height:6px;border-radius:50%;background:var(–ink3);animation:tb 1.2s infinite}
+.tdot:nth-child(2){animation-delay:.15s}.tdot:nth-child(3){animation-delay:.3s}
+@keyframes tb{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+.quick{padding:10px 20px 0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.quick::-webkit-scrollbar{display:none}
+.qchip{height:32px;padding:0 13px;border-radius:8px;border:1.5px solid var(–sand);background:var(–card);color:var(–ink2);font-size:12px;font-family:‘Plus Jakarta Sans’,sans-serif;font-weight:600;white-space:nowrap;cursor:pointer;transition:.15s}
+.qchip:hover{background:var(–warm);border-color:var(–ink3)}
+.input-row{padding:12px 20px 20px;border-top:1.5px solid var(–sand);display:flex;gap:8px;align-items:flex-end;flex-shrink:0}
+.msg-in{flex:1;min-height:42px;max-height:100px;padding:10px 14px;border:1.5px solid var(–sand);border-radius:12px;font-size:13.5px;font-family:‘Plus Jakarta Sans’,sans-serif;color:var(–ink);background:var(–warm);resize:none;outline:none;transition:.15s;line-height:1.5}
+.msg-in::placeholder{color:var(–ink3)}
+.msg-in:focus{border-color:var(–accent);background:var(–card);box-shadow:0 0 0 3px rgba(232,93,47,.1)}
+.send-btn{width:42px;height:42px;border-radius:12px;background:var(–ink);color:#fff;border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.15s}
+.send-btn:hover{background:var(–accent)}
+.send-btn:disabled{opacity:.35;cursor:not-allowed}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(26,20,16,.5);z-index:300;display:flex;align-items:flex-end;padding:20px;backdrop-filter:blur(6px)}
+.modal{background:var(–cream);border-radius:20px;padding:32px 26px;width:100%;max-width:460px;margin:0 auto;border:1.5px solid var(–sand)}
+.modal-ico{font-size:28px;margin-bottom:14px}
+.modal-ttl{font-size:20px;font-weight:800;letter-spacing:-.6px;margin-bottom:8px;color:var(–ink)}
+.modal-txt{font-size:13px;color:var(–ink3);line-height:1.6;margin-bottom:20px}
+.modal-txt strong{color:var(–ink2);font-weight:700}
+.modal-inp{width:100%;height:46px;padding:0 14px;border:1.5px solid var(–sand);border-radius:11px;font-size:13px;font-family:‘Space Mono’,monospace;background:var(–warm);color:var(–ink);outline:none;margin-bottom:12px}
+.modal-inp:focus{border-color:var(–accent)}
+.modal-inp::placeholder{font-family:‘Plus Jakarta Sans’,sans-serif;color:var(–ink3)}
+.modal-btn{width:100%;height:46px;background:var(–ink);color:#fff;border:none;border-radius:11px;font-size:14px;font-weight:800;font-family:‘Plus Jakarta Sans’,sans-serif;cursor:pointer;margin-bottom:8px;transition:.15s}
+.modal-btn:hover{background:var(–accent)}
+.modal-skip{width:100%;height:38px;background:none;color:var(–ink3);border:none;font-size:13px;font-family:‘Plus Jakarta Sans’,sans-serif;cursor:pointer}
+</style>
+
+</head>
+<body>
+
+<div class="modal-bg" id="apiModal">
+  <div class="modal">
+    <div class="modal-ico">✦</div>
+    <div class="modal-ttl">Подключи AI-помощника</div>
+    <p class="modal-txt">Вставь Claude API ключ для умного подбора и помощи с заявками. Получить на <strong>console.anthropic.com</strong></p>
+    <input class="modal-inp" type="password" id="apiKeyInput" placeholder="sk-ant-api03-..." />
+    <button class="modal-btn" onclick="saveKey()">Активировать Youth.AI</button>
+    <button class="modal-skip" onclick="skipKey()">Пропустить — только база данных</button>
+  </div>
+</div>
+
+<nav>
+  <div class="logo">
+    <div class="logo-badge">Y.</div>
+    <div class="logo-name">Youth<span>.AI</span></div>
+  </div>
+  <div class="nav-tag">Beta · СНГ</div>
+  <button class="nav-ai-btn" onclick="openChat()">
+    <div class="dot"></div> AI-помощник
+  </button>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Платформа для молодёжи СНГ</div>
+  <h1>Найди свою<br><span class="hi">возможность</span></h1>
+  <p class="hero-sub">Хакатоны, олимпиады, MUN, гранты и конкурсы — всё актуальное в одном месте. AI подберёт под тебя и поможет написать заявку.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-n orange" id="totalCnt">20</div><div class="stat-l">возможностей</div></div>
+    <div class="stat"><div class="stat-n">6</div><div class="stat-l">категорий</div></div>
+    <div class="stat"><div class="stat-n">10+</div><div class="stat-l">стран</div></div>
+    <div class="stat"><div class="stat-n">AI</div><div class="stat-l">помощник</div></div>
+  </div>
+</div>
+
+<div class="search-zone">
+  <div class="search-wrap">
+    <div class="s-box">
+      <span class="s-ico">🔍</span>
+      <input class="s-input" id="sInput" type="text" placeholder="Поиск по названию, теме, стране..." oninput="doSearch()"/>
+    </div>
+  </div>
+</div>
+
+<div class="filters">
+  <button class="pill active" onclick="setF('all',this)">Все</button>
+  <button class="pill" onclick="setF('hackathon',this)">⚡ Хакатоны</button>
+  <button class="pill" onclick="setF('olympiad',this)">🧠 Олимпиады</button>
+  <button class="pill" onclick="setF('mun',this)">🌐 MUN</button>
+  <button class="pill" onclick="setF('grant',this)">🏆 Гранты</button>
+  <button class="pill" onclick="setF('program',this)">✈️ Программы</button>
+  <button class="pill" onclick="setF('competition',this)">🚀 Конкурсы</button>
+</div>
+
+<div class="section-header">
+  <div class="sec-line"></div>
+  <div class="sec-label" id="secLabel">Все возможности</div>
+  <div class="sec-line"></div>
+</div>
+
+<div class="cards" id="cards"></div>
+
+<button class="fab" onclick="openChat()" id="fab">
+  <div class="fdot"></div> Спросить AI
+</button>
+
+<div class="overlay" id="overlay" onclick="closeChat()"></div>
+<div class="panel" id="panel">
+  <div class="handle"></div>
+  <div class="panel-head">
+    <div style="display:flex;align-items:center">
+      <div class="ai-ava">🤖</div>
+      <div class="panel-meta">
+        <div class="panel-name">Youth.AI Ассистент</div>
+        <div class="panel-status">● онлайн</div>
+      </div>
+    </div>
+    <button class="close-x" onclick="closeChat()">✕</button>
+  </div>
+  <div class="msgs" id="msgs"></div>
+  <div class="quick" id="qchips">
+    <button class="qchip" onclick="qs('Казахстан, 10 класс, интересует AI и предпринимательство')">🇰🇿 10 класс, AI</button>
+    <button class="qchip" onclick="qs('Хакатоны для начинающих без опыта программирования')">⚡ Хакатон с нуля</button>
+    <button class="qchip" onclick="qs('Помоги написать мотивационное письмо для Samsung SFT')">✍️ Мотивационное</button>
+    <button class="qchip" onclick="qs('Олимпиады по информатике и AI международные')">🧠 Олимпиады AI</button>
+    <button class="qchip" onclick="qs('MUN конференции 2026 как участвовать')">🌐 MUN с нуля</button>
+  </div>
+  <div class="input-row">
+    <textarea class="msg-in" id="msgIn" placeholder="Расскажи: страна, класс, интересы..." rows="1" onkeydown="hKey(event)" oninput="grow(this)"></textarea>
+    <button class="send-btn" id="sendBtn" onclick="send()">➤</button>
+  </div>
+</div>
+
+<script>
+const DATA=[
+  // ХАКАТОНЫ
+  {id:1,type:'hackathon',title:'USAII Global AI Hackathon 2026',desc:'Виртуальный хакатон по AI для школьников 9–12 кл. и студентов. Призовой фонд $15 000. Наставники, менторство, командная работа. Без опыта — можно.',country:'Международный',age:'14–25 лет',subject:'AI',deadline:'14–21 июня 2026',link:'https://aihackathon.usaii.org/',soon:false},
+  {id:2,type:'hackathon',title:'MEGA Hackathon 2026',desc:'Международный онлайн-хакатон для школьников и студентов по SDG. Проекты на стыке CS, экономики и устойчивого развития. Полностью бесплатно.',country:'Международный',age:'14–22 лет',subject:'STEM / Social',deadline:'28 февр. – 1 марта 2026',link:'https://mega-hackathon-2026-students.devpost.com/',soon:false},
+  {id:3,type:'hackathon',title:'DeveloperWeek 2026 Hackathon',desc:'Крупнейший ежегодный хакатон для разработчиков. Онлайн и офлайн-треки. Реальные задачи от компаний-спонсоров. Регистрация на Devpost.',country:'Международный',age:'16+',subject:'Разработка',deadline:'Февраль 2026',link:'https://www.developerweek.com/hackathon/',soon:false},
+  {id:4,type:'hackathon',title:'IT-Планета 2026 (XVII олимпиада)',desc:'СНГ-олимпиада по IT для студентов и школьников. Конкурсы: мобильные приложения, AI, дипфейки, VR. На русском, бесплатно. Платформа Braim.',country:'СНГ',age:'14–25 лет',subject:'IT / AI',deadline:'2025–2026',link:'https://it-planet.org/',soon:false},
+
+  // ОЛИМПИАДЫ
+  {id:5,type:'olympiad',title:'IOAI 2026 — Олимпиада по AI',desc:'Международная олимпиада по искусственному интеллекту пройдёт в Астане, Казахстан! 3-е издание, 2–8 августа 2026. Участие через национальный отбор.',country:'Казахстан / Международный',age:'Школьники',subject:'AI',deadline:'Август 2026',link:'https://ioai-official.org/',soon:false},
+  {id:6,type:'olympiad',title:'IOI 2026 — Олимпиада по информатике',desc:'Международная олимпиада по информатике 2026 пройдёт в Узбекистане. Одна из пяти официальных международных научных олимпиад. Отбор через национальные этапы.',country:'Узбекистан / Международный',age:'10–11 класс',subject:'Информатика',deadline:'2026',link:'https://ioinformatics.org/',soon:false},
+  {id:7,type:'olympiad',title:'IMO 2026 — Международная олимпиада по математике',desc:'Чемпионат мира по математике среди школьников. Более 100 стран. Участие через олимпиаду Дарын → республиканский этап.',country:'Международный',age:'9–11 класс',subject:'Математика',deadline:'2026',link:'https://www.imo-official.org/',soon:false},
+  {id:8,type:'olympiad',title:'IPhO 2026 — Олимпиада по физике',desc:'Самое престижное международное соревнование по физике. Теоретический и экспериментальный туры. Отбор через Республиканскую олимпиаду.',country:'Международный',age:'10–11 класс',subject:'Физика',deadline:'2026',link:'https://ipho-unofficial.org/',soon:false},
+  {id:9,type:'olympiad',title:'IEO — Олимпиада по экономике',desc:'Международная олимпиада по экономике и финансам. Поддержана Нобелевским лауреатом Эриком Маскиным. Бесплатное участие. 50+ стран.',country:'Международный',age:'10–11 класс',subject:'Экономика',deadline:'2026',link:'https://ieo-official.org/',soon:false},
+  {id:10,type:'olympiad',title:'Daryn.kz — Республиканские олимпиады',desc:'Официальный портал республиканских олимпиад Казахстана. Все предметы: математика, физика, биология, история, ИКТ. Победители — на международные.',country:'Казахстан',age:'7–11 класс',subject:'Все предметы',deadline:'Ноябрь – март',link:'https://daryn.kz/respa/',soon:false},
+
+  // MUN
+  {id:11,type:'mun',title:'NHSMUN 2026 — Нью-Йорк',desc:'Крупнейшая и старейшая MUN-конференция для школьников. Основана в 1975. Нью-Йорк, март 2026. Доступ к реальным дипломатам ООН.',country:'США / Международный',age:'14–18 лет',subject:'Дипломатия',deadline:'Март 2026',link:'https://imuna.org/nhsmun/nyc/',soon:false},
+  {id:12,type:'mun',title:'CMUNC XXIV — Cornell University',desc:'Ежегодная конференция MUN от Корнеллского университета для школьников. Апрель 16–19, 2026. Регистрация открыта.',country:'США',age:'14–18 лет',subject:'Международные отношения',deadline:'16–19 апр. 2026',link:'https://www.cmunc.net/',soon:true},
+  {id:13,type:'mun',title:'mymun.com — база конференций 2026',desc:'Более 1000 MUN-конференций по всему миру. Апрель 2026: Бухарест, Макао, Лагос, Кипр. Фильтрация по городу, дате, стоимости.',country:'Весь мир',age:'13–26 лет',subject:'MUN',deadline:'Апрель 2026',link:'https://mymun.com/conferences/list',soon:true},
+  {id:14,type:'mun',title:'FWWMUN Washington D.C. 2026',desc:'Международная MUN-конференция в Вашингтоне. Ноябрь 2026. Одиночные участники — до 26 лет. Помощь с визой.',country:'США',age:'13–26 лет',subject:'Дипломатия / ООН',deadline:'5–8 нояб. 2026',link:'https://www.fwwmun-nyc.org/mun-washingtondc',soon:false},
+
+  // ГРАНТЫ
+  {id:15,type:'grant',title:'Samsung Solve for Tomorrow 2026 — Казахстан',desc:'Республиканский конкурс STEM-стартапов для школьников. Призовой фонд 10 млн тенге. Бесплатно. Возраст 13–18 лет. Заявки до 30 апреля 2026!',country:'Казахстан',age:'13–18 лет',subject:'STEM / Стартапы',deadline:'30 апр. 2026',link:'https://solvefortomorrow.kz/',soon:true},
+  {id:16,type:'grant',title:'Stipendium Hungaricum — Венгрия',desc:'Полная стипендия правительства Венгрии. Обучение + ежемесячная стипендия. Бакалавриат и магистратура. Для граждан СНГ.',country:'СНГ',age:'17+',subject:'Любое',deadline:'Январь 2027',link:'https://stipendiumhungaricum.hu/',soon:false},
+  {id:17,type:'grant',title:'Türkiye Burslari — Турция',desc:'Государственная стипендия Турции. Полное покрытие: обучение, жильё, страховка. Бакалавриат, магистратура, PhD.',country:'СНГ',age:'17+',subject:'Любое',deadline:'Февраль 2027',link:'https://turkiyeburslari.gov.tr/',soon:false},
+
+  // ПРОГРАММЫ
+  {id:18,type:'program',title:'FLEX — год в американской школе',desc:'Год обучения в США в принимающей семье. Полностью финансируется правительством США. Один из самых конкурентных обменов для СНГ.',country:'СНГ',age:'15–17 лет',subject:'Обмен / Английский',deadline:'Декабрь 2026',link:'https://americancouncils.org/programs/flex',soon:false},
+
+  // КОНКУРСЫ
+  {id:19,type:'competition',title:'ISEF — Международный научный конкурс',desc:'Крупнейший в мире научный конкурс для школьников. Призы до $75 000. Любая научная область. Участие через национальные конкурсы (Дарын).',country:'Международный',age:'14–18 лет',subject:'Наука',deadline:'2026',link:'https://societyforscience.org/isef/',soon:false},
+  {id:20,type:'competition',title:'RCDO.kz — дистанционные олимпиады КЗ',desc:'Республиканский портал дистанционных олимпиад Казахстана. Участие онлайн из любой точки страны. Сертификаты и грамоты за победу.',country:'Казахстан',age:'1–11 класс',subject:'Все предметы',deadline:'Круглый год',link:'https://rcdo.kz/',soon:false},
+];
+const BG={hackathon:'bh',olympiad:'bo',grant:'bg',program:'bp',competition:'bc',mun:'bm'};
+const BL={hackathon:'⚡ Хакатон',olympiad:'🧠 Олимпиада',grant:'🏆 Грант',program:'✈️ Программа',competition:'🚀 Конкурс',mun:'🌐 MUN'};
+const FL={all:'Все возможности',hackathon:'Хакатоны',olympiad:'Олимпиады',mun:'MUN-конференции',grant:'Гранты',program:'Программы обмена',competition:'Конкурсы'};
+let apiKey='',history=[],filter='all',query='';
+
+function init(){
+  render();
+  const k=sessionStorage.getItem('yai');
+  if(k){apiKey=k;document.getElementById('apiModal').style.display='none';}
+}
+function saveKey(){
+  const k=document.getElementById('apiKeyInput').value.trim();
+  if(!k)return;
+  apiKey=k;sessionStorage.setItem('yai',k);
+  document.getElementById('apiModal').style.display='none';
+}
+function skipKey(){document.getElementById('apiModal').style.display='none';}
+
+function render(){
+  const list=DATA.filter(o=>{
+    const mf=filter==='all'||o.type===filter;
+    const q=query.toLowerCase();
+    const mq=!q||[o.title,o.country,o.subject,o.desc].some(s=>s.toLowerCase().includes(q));
+    return mf&&mq;
+  });
+  document.getElementById('secLabel').textContent=FL[filter]||'Все возможности';
+  document.getElementById('totalCnt').textContent=DATA.length;
+  const w=document.getElementById('cards');
+  if(!list.length){w.innerHTML=`<div class="empty"><div class="empty-ico">🔍</div><div class="empty-t">Ничего не найдено по запросу</div></div>`;return;}
+  w.innerHTML=list.map((o,i)=>`
+    <div class="card ${o.type}" style="animation-delay:${i*.04}s" ${o.link?`onclick="window.open('${o.link}','_blank')"`:''}> 
+      <div class="card-top">
+        <span class="badge ${BG[o.type]}">${BL[o.type]}</span>
+        <div class="card-right">
+          <span class="deadline${o.soon?' soon':''}">${o.soon?'🔥 ':''}${o.deadline}</span>
+        </div>
+      </div>
+      <div class="card-title">${o.title}</div>
+      <div class="card-desc">${o.desc}</div>
+      <div class="card-foot">
+        <div class="tags"><span class="tag">🌍 ${o.country}</span><span class="tag">📚 ${o.subject}</span><span class="tag">👤 ${o.age}</span></div>
+        ${o.link?'<span class="card-link">Открыть →</span>':''}
+      </div>
+    </div>`).join('');
+}
+function setF(f,btn){filter=f;document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));btn.classList.add('active');render();}
+function doSearch(){query=document.getElementById('sInput').value;render();}
+
+function openChat(){
+  document.getElementById('panel').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('fab').style.display='none';
+  if(!history.length)aMsg('Привет! 👋 Расскажи о себе — из какой ты страны, какой класс, что интересует. Подберу лучшие возможности и помогу написать заявку или мотивационное письмо.');
+}
+function closeChat(){
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('fab').style.display='flex';
+}
+function aMsg(t){
+  const c=document.getElementById('msgs');
+  const d=document.createElement('div');d.className='msg ai';
+  d.innerHTML=`<div class="bubble">${t.replace(/\n/g,'<br>')}</div>`;
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function uMsg(t){
+  const c=document.getElementById('msgs');
+  const d=document.createElement('div');d.className='msg user';
+  d.innerHTML=`<div class="bubble">${t}</div>`;
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function showTyp(){
+  const c=document.getElementById('msgs');
+  const d=document.createElement('div');d.id='typ';d.className='typing';
+  d.innerHTML='<div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>';
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function hideTyp(){const t=document.getElementById('typ');if(t)t.remove();}
+function qs(t){document.getElementById('msgIn').value=t;document.getElementById('qchips').style.display='none';send();}
+function hKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}
+function grow(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';}
+
+async function send(){
+  const inp=document.getElementById('msgIn');
+  const t=inp.value.trim();if(!t)return;
+  inp.value='';inp.style.height='auto';
+  document.getElementById('sendBtn').disabled=true;
+  document.getElementById('qchips').style.display='none';
+  uMsg(t);history.push({role:'user',content:t});showTyp();
+  if(!apiKey){hideTyp();aMsg('Для AI нужен API ключ. Обнови страницу и введи ключ с console.anthropic.com');document.getElementById('sendBtn').disabled=false;return;}
+  const sys=`Ты — AI-помощник платформы Youth.AI для школьников и студентов СНГ.
+
+База возможностей (актуальная):
+${JSON.stringify(DATA)}
+
+Твои задачи:
+1. Подбирать подходящие возможности из базы под профиль пользователя
+2. Помогать писать мотивационные письма, CV и эссе
+3. Давать конкретные советы по заявкам и подготовке
+4. Отвечать на вопросы про MUN, хакатоны, олимпиады
+
+Правила: отвечай на русском, кратко и по делу. Предлагай конкретные варианты из базы с объяснением почему подходит. Если просят мотивационное письмо — пиши черновик.`;
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:history})});
+    const data=await res.json();hideTyp();
+    if(data.content?.[0]?.text){const r=data.content[0].text;history.push({role:'assistant',content:r});aMsg(r);}
+    else aMsg('Ошибка API. Проверь ключ.');
+  }catch{hideTyp();aMsg('Не удалось подключиться. Проверь соединение.');}
+  document.getElementById('sendBtn').disabled=false;
+}
+init();
+</script>
+
+</body>
+</html>
